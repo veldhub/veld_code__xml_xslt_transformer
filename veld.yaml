@@ -1,0 +1,10 @@
+x-veld:
+  executable:
+
+services:
+  veld:
+    build: .
+    volumes:
+      - ./src/:/veld/executable/
+    command: /veld/executable/transform.sh
+
