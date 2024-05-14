@@ -1,6 +1,44 @@
 x-veld:
   executable:
 
+    inputs:
+      - volume: /veld/input/1/
+        type: "xml"
+      - volume: /veld/input/2/
+        type: "xsl"
+
+    outputs:
+      volume: /veld/output/
+      type: "txt"
+
+    environment:
+      in_xml_path:
+        description: "the input xml file or folder containing xml"
+        path_prefix: "/veld/input/1/"
+        type: 
+          - "xml"
+          - "folder" # containing xml files in any depth
+        optional: true # though either in_xml_path or in_xml_url must be defined
+      in_xml_url:
+        description: "a url pointing to an xml"
+        type: "url"
+        optional: true # though either in_xml_path or in_xml_url must be defined
+      in_xsl_path:
+        description: "the input xsl file or folder containing xsl"
+        path_prefix: "/veld/input/2/"
+        type: "xsl"
+        optional: true # though either in_xsl_path or in_xsl_url must be defined
+      in_xsl_url:
+        description: "a url pointing to an xsl"
+        type: "url"
+        optional: true # though either in_xsl_path or in_xsl_url must be defined
+      out_txt_path:
+        description: "output file or folder for converted txt"
+        path_prefix: "/veld/output/"
+        type:
+          - "txt" # if single xml or single xml url is input
+          - "folder" # if a folder containing xml is input
+
 services:
   veld:
     build: .
