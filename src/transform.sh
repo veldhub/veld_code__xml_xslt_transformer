@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo hey
+xsltproc $in_xsl_path $in_xml_path > $out_txt_path
