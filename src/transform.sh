@@ -75,8 +75,8 @@ do_xslt_recursively() {
           # an equivalent output folder / file structure must be created dynamically. 
           in_xml_path_single=$file_or_folder
 
-          # remove /veld/input/
-          out_txt_path_single=${in_xml_path_single/\/veld\/input\/1\//}
+          # remove /veld/input/* so that only relevant subfolder stays
+          out_txt_path_single=${in_xml_path_single#$in_xml_path}
 
           # replace .xml with .txt
           out_txt_path_single=${out_txt_path_single/.xml/.txt}
