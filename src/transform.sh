@@ -28,7 +28,7 @@ fi
 do_xslt_recursively() {
 
   # quick info on current recursive level / parameters
-  echo "do_xslt_recursively" "$1" "$2" "$3"
+  # echo "do_xslt_recursively" "$1" "$2" "$3"
 
   # if file
   if [ -f "$2" ]; then
@@ -37,7 +37,7 @@ do_xslt_recursively() {
     if [[ "$2" == *.xml ]]; then
 
       # since the current parameter is a xml file, call xsltproc on it
-      echo "is xml. processing"
+      # echo "is xml. processing"
 
       # create parent folder of output (if it doesn't exist)
       out_txt_path_folder=${3%/*}
@@ -46,30 +46,30 @@ do_xslt_recursively() {
       fi
 
       # call xsltproc
-      echo "executing xsltproc ${1} ${2} > ${3}"
+      echo "executing: xsltproc ${1} ${2} > ${3}"
       xsltproc "$1" "$2" > "$3"
 
     else
 
       # if the input parameter is a non-xml file, this must have been a mistake. Abort then.
-      echo "not a xml file" "$2"
+      # echo "not a xml file" "$2"
       exit 1
     fi
 
   # if folder
   elif [ -d "$2" ]; then
-    echo "check content of folder" "$2"
+    # echo "check content of folder" "$2"
 
     # iterate over content of folder
     for file_or_folder in "$2"/*; do
-      echo "check if file or folder" "$file_or_folder"
+      # echo "check if file or folder" "$file_or_folder"
 
       # if file
       if [ -f "$file_or_folder" ]; then
 
         # if xml
         if [[ "$file_or_folder" == *.xml ]]; then
-          echo "is xml. creating equivalent target txt"
+          # echo "is xml. creating equivalent target txt"
 
           # since this xml file was detected by iterating over a folder (potentially recursively), 
           # an equivalent output folder / file structure must be created dynamically. 
@@ -87,15 +87,15 @@ do_xslt_recursively() {
           # step further down, to reuse the xsltproc creation logic at the beginning of this
           # function
           do_xslt_recursively "$1" "$in_xml_path_single" "$out_txt_path_single"
-        else
+        # else
 
           # is file, but not xml. Ignore then.
-          echo "is neither folder, nor xml"
+          # echo "is neither folder, nor xml"
         fi 
 
       # if folder
       elif [ -d "$file_or_folder" ]; then
-        echo "is folder"
+        # echo "is folder"
 
         # recurse downwards into this subfolder
         do_xslt_recursively "$1" "$file_or_folder"
