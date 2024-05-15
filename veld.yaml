@@ -1,5 +1,6 @@
 x-veld:
   executable:
+    description: "generic xml / xslt transformation setup."
 
     inputs:
       - volume: /veld/input/1/
@@ -9,7 +10,9 @@ x-veld:
 
     outputs:
       volume: /veld/output/
-      type: "txt"
+      type: 
+        - "xml"
+        - "txt"
 
     environment:
       in_xml_path:
