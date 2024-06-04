@@ -1,5 +1,5 @@
 x-veld:
-  executable:
+  code:
     description: "generic xml / xslt transformation setup."
 
     inputs:
@@ -46,6 +46,6 @@ services:
   veld:
     build: .
     volumes:
-      - ./src/:/veld/executable/
-    command: /veld/executable/transform.sh
+      - ./src/:/veld/code/
+    command: /veld/code/transform.sh
 
