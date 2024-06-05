@@ -1,51 +1,50 @@
 x-veld:
   code:
-    description: "generic xml / xslt transformation setup."
+    # TODO
+    about:
+      description: "generic xml / xslt transformation setup."
+      topics:
 
     inputs:
       - volume: /veld/input/1/
-        type: "xml"
+        file_formats: "xml"
       - volume: /veld/input/2/
-        type: "xsl"
+        file_formats: "xsl"
 
     outputs:
       volume: /veld/output/
-      type: 
+      file_formats: 
         - "xml"
         - "txt"
 
     environment:
       in_xml_path:
         description: "the input xml file or folder containing xml"
+        type: path
         path_prefix: "/veld/input/1/"
-        type: 
-          - "xml"
-          - "folder" # containing xml files in any depth
         optional: true # though either in_xml_path or in_xml_url must be defined
       in_xml_url:
         description: "a url pointing to an xml"
-        type: "url"
+        type: url
         optional: true # though either in_xml_path or in_xml_url must be defined
       in_xsl_path:
         description: "the input xsl file or folder containing xsl"
+        type: path
         path_prefix: "/veld/input/2/"
-        type: "xsl"
         optional: true # though either in_xsl_path or in_xsl_url must be defined
       in_xsl_url:
         description: "a url pointing to an xsl"
-        type: "url"
+        type: url
         optional: true # though either in_xsl_path or in_xsl_url must be defined
       out_txt_path:
         description: "output file or folder for converted txt"
+        type: path
         path_prefix: "/veld/output/"
-        type:
-          - "txt" # if single xml or single xml url is input
-          - "folder" # if a folder containing xml is input
 
 services:
   veld:
     build: .
+    command: /veld/code/transform.sh
     volumes:
       - ./src/:/veld/code/
-    command: /veld/code/transform.sh
 
