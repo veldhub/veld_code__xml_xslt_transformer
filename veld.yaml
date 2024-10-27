@@ -1,45 +1,37 @@
 x-veld:
   code:
-    # TODO
-    about:
-      description: "generic xml / xslt transformation setup."
-      topics:
+    description: "generic xml / xslt transformation setup."
+    topics:
 
     inputs:
       - volume: /veld/input/1/
-        file_formats: "xml"
+        environment: in_xml_path
+        description: "the input xml file or folder containing xml"
+        file_type: "xml"
+        optional: true # though either in_xml_path or in_xml_url must be defined
       - volume: /veld/input/2/
-        file_formats: "xsl"
+        environment: in_xsl_path
+        description: "the input xsl file or folder containing xsl"
+        file_type: "xslt"
+        optional: true # though either in_xsl_path or in_xsl_url must be defined
 
     outputs:
-      volume: /veld/output/
-      file_formats: 
+      - volume: /veld/output/
+        environment: out_txt_path
+        description: "output file or folder for converted txt"
+        file_type: 
         - "xml"
         - "txt"
 
-    environment:
-      in_xml_path:
-        description: "the input xml file or folder containing xml"
-        type: path
-        path_prefix: "/veld/input/1/"
-        optional: true # though either in_xml_path or in_xml_url must be defined
-      in_xml_url:
+    settings:
+      - environment: in_xml_url
         description: "a url pointing to an xml"
-        type: url
+        env_type: "url"
         optional: true # though either in_xml_path or in_xml_url must be defined
-      in_xsl_path:
-        description: "the input xsl file or folder containing xsl"
-        type: path
-        path_prefix: "/veld/input/2/"
-        optional: true # though either in_xsl_path or in_xsl_url must be defined
-      in_xsl_url:
+      - environment: in_xsl_url
         description: "a url pointing to an xsl"
-        type: url
+        env_type: "url"
         optional: true # though either in_xsl_path or in_xsl_url must be defined
-      out_txt_path:
-        description: "output file or folder for converted txt"
-        type: path
-        path_prefix: "/veld/output/"
 
 services:
   veld:
