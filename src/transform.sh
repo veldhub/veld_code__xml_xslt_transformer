@@ -1,5 +1,9 @@
 #!/bin/bash
 
+in_xml_path=/veld/input/xml/"$in_xml_file"
+in_xsl_path=/veld/input/xsl/"$in_xsl_file"
+out_txt_path=/veld/output/"$out_txt_file"
+
 # download xml if the url environment was set. Check if conflicting xml path also exists. 
 if [[ "$in_xml_url" != "" ]]; then
   if [[ "$in_xml_path" != "" ]]; then
@@ -109,4 +113,4 @@ do_xslt_recursively() {
   fi
 }
 
-do_xslt_recursively $in_xsl_path $in_xml_path $out_txt_path
+do_xslt_recursively "$in_xsl_path" "$in_xml_path" "$out_txt_path"
