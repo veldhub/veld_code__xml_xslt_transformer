@@ -8,7 +8,9 @@ x-veld:
     inputs:
       - volume: /veld/input/xml/
         environment: in_xml_file
-        description: "the input xml file or folder containing xml"
+        description: "the input xml file or folder containing xml. Note that if var `in_xml_file` 
+          is set, this script will only transform that file. If it's not set, it will go through 
+          the input folder recursively and create an equivalent output data structure."
         file_type: "xml"
         optional: true
       - volume: /veld/input/xsl/
@@ -20,20 +22,12 @@ x-veld:
     outputs:
       - volume: /veld/output/
         environment: out_txt_file
-        description: "output file or folder for converted txt"
+        description: "output file or folder for converted txt. Note that the var 'out_txt_file' is 
+          only respected, when the input is a single xml file. If the input is a folder, the output 
+          will be an equivalent data structure and the var 'out_txt_file' is ignored."
         file_type: 
         - "xml"
         - "txt"
-
-    settings:
-      - environment: in_xml_url
-        description: "a url pointing to an xml"
-        env_type: "url"
-        optional: true # though either in_xml_file or in_xml_url must be defined
-      - environment: in_xsl_url
-        description: "a url pointing to an xsl"
-        env_type: "url"
-        optional: true # though either in_xsl_file or in_xsl_url must be defined
 
 services:
   veld:

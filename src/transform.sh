@@ -4,28 +4,6 @@ in_xml_path=/veld/input/xml/"$in_xml_file"
 in_xsl_path=/veld/input/xsl/"$in_xsl_file"
 out_txt_path=/veld/output/"$out_txt_file"
 
-# download xml if the url environment was set. Check if conflicting xml path also exists. 
-if [[ "$in_xml_url" != "" ]]; then
-  if [[ "$in_xml_path" != "" ]]; then
-    echo "both in_xml_url and in_xml_path are provided. Exiting. Define only one." 
-    exit 1
-  fi
-  echo "downloading xml from ${in_xml_url}"
-  curl -o /tmp/tmp.xml "$in_xml_url"
-  in_xml_path=/tmp/tmp.xml
-fi
-
-# download xml if the url environment was set. Check if conflicting xsl path also exists. 
-if [[ "$in_xsl_url" != "" ]]; then
-  if [[ "$in_xsl_path" != "" ]]; then
-    echo "both in_xsl_url and in_xsl_path are provided. Exiting. Define only one." 
-    exit 1
-  fi
-  echo "downloading xsl from ${in_xsl_url}"
-  curl -o /tmp/tmp.xsl "$in_xsl_url"
-  in_xsl_path=/tmp/tmp.xsl
-fi
-
 # function to call xsltproc. If the parameters are files, xsltproc is called directly on them. If 
 # the parameters are folders, then this function goes through the content of the folder recursively
 # and creating equivalent output folder / file structure for each matching xml file input.
