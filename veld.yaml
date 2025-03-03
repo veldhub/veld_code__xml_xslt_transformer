@@ -29,6 +29,13 @@ x-veld:
         - "xml"
         - "txt"
 
+    config:
+      environment_var: set_verbose
+      description: "sets verbosity of xslt to display more or no information"
+      var_type: bool
+      default: false
+      optional: true
+
 services:
   veld:
     build: .
@@ -39,4 +46,5 @@ services:
       in_xsl_file: null
       in_xml_file: null
       out_txt_file: null
+      set_verbose: false
 

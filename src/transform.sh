@@ -28,8 +28,16 @@ do_xslt_recursively() {
       fi
 
       # call xsltproc
-      echo "executing: xsltproc ${1} ${2} > ${3}"
-      xsltproc "$1" "$2" > "$3"
+      #echo "executing: xsltproc ${1} ${2} > ${3}"
+      #xsltproc "$1" "$2" > "$3"
+      command="xsltproc"
+      if [ "$set_verbose" = "true" ] ; then
+        command+=" --verbose"
+      fi
+      command+=" ${1} ${2} > ${3}"
+      echo "executing:"
+      echo "$command"
+      eval "$command"
 
     else
 
